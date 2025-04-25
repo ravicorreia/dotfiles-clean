@@ -1,0 +1,105 @@
+# silent the direnv output
+export DIRENV_LOG_FORMAT=""
+
+# fzf defaut configs
+export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --style full"
+export FZF_CTRL_T_OPTS="--style full --walker-skip .git,node_modules,target --preview 'bat --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# powerlevel10k
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+if [ -e /home/$USER/.nix-profile/etc/profile.d/nix.sh ]; then
+  . /home/$USER/.nix-profile/etc/profile.d/nix.sh;
+fi # added by Nix installer
+
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
+  && ~/.tmux/plugins/tpm/bin/install_plugins
+fi
+setopt PROMPT_SUBST
+# precmd() { print -n "\033]0;${PWD}\007" }
+
+# eval "$( keychain --eval --agents ssh --quiet --ignore-missing bitbucket p_github )"
+
+# Editor
+EDITOR='nvim'
+
+# Zinit
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load Zinit
+source "${ZINIT_HOME}/zinit.zsh"
+# Load Completions
+autoload -U compinit && compinit
+# Completion Styling
+zstyle ':completion:*' menu no
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview "ls -a --color $realpath"
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "eza --long --tree --level=1 --all --icons --group-directories-last --git-repos --git --no-permissions --no-filesize --no-user --no-time $realpath"
+# Add in Aloxaf fzf-tab plugin
+zinit ice depth=1; zinit light Aloxaf/fzf-tab
+# Add in Powerlevel10k
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Add in oh-my-zsh plugins
+# zinit snippet OMZP::git
+# Add in zsh plugins
+zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
+zinit ice depth=1; zinit light zsh-users/zsh-completions
+zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
+# Zinit pede pra colocar isso pra ajeitar ordem de carregamento dos plugins \_('-')_/
+zinit cdreplay -q
+
+# powerlevel10k
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
+
+# Keybindigns
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+# Enable vi mode
+bindkey -v
+# Set jk as escape
+bindkey -M viins 'kj' vi-cmd-mode
+
+alias l='eza --long --tree --level=1 --all --icons --group-directories-last --git-repos --git --no-permissions --no-filesize --no-user --no-time'
+alias ~='cd ~'
+alias inv='nvim $(fzf --style full -m --preview="bat --color=always {}")'
+alias nv='nvim'
+# alias jnv='NVIM_APPNAME=lazyvim-java nvim'
+alias cl='clear'
+alias lg='lazygit'
+alias q='exit'
+# alias nix-shell='nix-shell --command "exec zsh"'
+# alias home-up='echo "Redefinindo a Home..." && home-manager switch --flake $HOME/dotfiles/#home'
+# alias workenv-up='echo "Redefinindo o Work Environment..." && home-manager switch --flake $HOME/dotfiles/#workenv'
+# alias home-flake-up='echo "Atualizando o flake do Home Manager" && nix flake update --flake path:dotfiles'
+
