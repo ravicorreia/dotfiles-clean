@@ -1,8 +1,0 @@
-# Arquivos do Nix
-nix/
-nix/flake.nix
-nix/flake.lock
-nix/.direnv
-nix/.devenv
-nix/result
-nix/result-*
