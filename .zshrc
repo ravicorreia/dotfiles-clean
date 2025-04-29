@@ -1,20 +1,3 @@
-# Configuração para conectar ao ssh-agent do Windows
-if [ -S /mnt/c/ProgramData/ssh/sockets/ssh-agent ]; then
-  export SSH_AUTH_SOCK=/mnt/c/ProgramData/ssh/sockets/ssh-agent
-elif [ -S "$HOME/.ssh/agent.sock" ]; then
-  export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
-else
-  # Verifica se o diretório .ssh existe, se não, cria e define as permissões
-  if [ ! -d "$HOME/.ssh" ]; then
-    mkdir -p "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
-  fi
-  rm -f "$HOME/.ssh/agent.sock"
-  (umask 077; mkfifo "$HOME/.ssh/agent.sock")
-  export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
-  /mnt/c/Windows/System32/OpenSSH/ssh-agent -a "$HOME/.ssh/agent.sock" > /dev/null 2>&1 &
-fi
-
 # silent the direnv output
 export DIRENV_LOG_FORMAT=""
 
@@ -115,8 +98,3 @@ alias nv='nvim'
 alias cl='clear'
 alias lg='lazygit'
 alias q='exit'
-# alias nix-shell='nix-shell --command "exec zsh"'
-# alias home-up='echo "Redefinindo a Home..." && home-manager switch --flake $HOME/dotfiles/#home'
-# alias workenv-up='echo "Redefinindo o Work Environment..." && home-manager switch --flake $HOME/dotfiles/#workenv'
-# alias home-flake-up='echo "Atualizando o flake do Home Manager" && nix flake update --flake path:dotfiles'
-
