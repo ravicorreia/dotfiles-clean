@@ -1,6 +1,8 @@
 # silent the direnv output
 export DIRENV_LOG_FORMAT=""
 
+$HOME/.nix-profile/bin/fastfetch
+
 # fzf defaut configs
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --style full"
 export FZF_CTRL_T_OPTS="--style full --walker-skip .git,node_modules,target --preview 'bat --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
