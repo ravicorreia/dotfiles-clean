@@ -21,6 +21,7 @@ $kotlin\
 $haskell\
 $python\
 [](fg:color_blue bg:color_bg3)\
+$nix_shell\
 $docker_context\
 $conda\
 $pixi\
@@ -152,6 +153,11 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 symbol = ""
 style = "bg:color_bg3"
 format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[nix_shell]
+symbol = "❄️ "
+style = "bg:color_bg3"
+format = '[[ $symbol( $context)( $name)( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
 
 [conda]
 style = "bg:color_bg3"

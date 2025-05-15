@@ -1,4 +1,3 @@
-# silent the direnv output
 export DIRENV_LOG_FORMAT=""
 
 $HOME/.nix-profile/bin/fastfetch
@@ -16,7 +15,7 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
   && ~/.tmux/plugins/tpm/bin/install_plugins
 fi
 setopt PROMPT_SUBST
-# precmd() { print -n "\033]0;${PWD}\007" }
+precmd() { print -n "\033]0;${PWD}\007" }
 
 # Editor
 EDITOR='nvim'
@@ -51,6 +50,7 @@ zinit ice depth=1; zinit light Aloxaf/fzf-tab
 zinit ice depth=1; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice depth=1; zinit light zsh-users/zsh-completions
 zinit ice depth=1; zinit light zsh-users/zsh-autosuggestions
+
 # Zinit pede pra colocar isso pra ajeitar ordem de carregamento dos plugins \_('-')_/
 zinit cdreplay -q
 
@@ -84,51 +84,7 @@ alias l='eza --long --tree --level=1 --all --icons --group-directories-last --gi
 alias ~='cd ~'
 alias inv='nvim $(fzf --style full -m --preview="bat --color=always {}")'
 alias nv='nvim'
-# alias jnv='NVIM_APPNAME=lazyvim-java nvim'
 alias cl='clear'
 alias lg='lazygit'
 alias q='exit'
 
-
-
-
-
-
-
-
-# --- CÓDIGO BÁSICO PARA PROMPT TRANSIENTE PERSONALIZADO ---
-# !!! AVISO SÉRIO: ESTE CÓDIGO É UMA TENTATIVA BÁSICA E PODE NÃO FUNCIONAR CORRETAMENTE
-#     OU PODE CONFLITAR COM TEMAS AVANÇADOS COMO O POWERLEVEL10K.
-#     A CONFIGURAÇÃO DO TEMA É A FORMA RECOMENDADA. !!!
-
-# Função que tenta limpar a linha do prompt anterior
-function _attempt_transient_clear() {
-  # Verifica se estamos numa sessão interativa com um terminal real
-  # e se o ZLE (Zsh Line Editor) está ativo.
-  if [[ $- == *i* ]] && [[ -n "$TERM" ]] && [[ -n "$ZLE_STATE" ]]; then
-    # Usa sequências de controlo ANSI:
-    # \e[1A : Move o cursor 1 linha para cima
-    # \r    : Move o cursor para o início da linha atual (que agora é a linha acima)
-    # \e[K  : Limpa a linha desde o cursor até ao fim
-
-    # Nota: Se o teu prompt anterior ocupa mais de 1 linha, esta limpeza NÃO será suficiente.
-    # Uma limpeza mais robusta seria \e[2K (limpar a linha inteira), mas ainda assim
-    # precisarias de garantir que o cursor está no início da linha correta.
-
-    # O '-n' impede que o 'echo' imprima uma nova linha no final.
-    # O '-e' permite a interpretação das sequências de escape '\e'.
-    echo -ne "\e[1A\r\e[K"
-
-    # Após este comando, o Zsh imprimirá o novo prompt na linha onde estava
-    # o prompt anterior (agora limpa).
-  fi
-}
-
-# Adiciona a função à array de funções executadas antes de mostrar o prompt.
-# É CRUCIAL que esta função seja adicionada *DEPOIS* de o teu tema (Powerlevel10k)
-# ser source no .zshrc, mas pode precisar de ser antes das funções que o próprio
-# tema adiciona a precmd_functions, o que cria o potencial conflito.
-# Tenta colocar este bloco DEPOIS da linha onde o teu tema é source.
-precmd_functions+=("_attempt_transient_clear")
-
-# --- Fim do Código Básico Transiente ---
