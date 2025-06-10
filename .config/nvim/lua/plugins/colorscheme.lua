@@ -174,7 +174,7 @@ return {
         config = function()
             local monokai = require("monokai-pro")
             monokai.setup({
-                transparent_background = false,
+                transparent_background = true,
                 terminal_colors = true,
                 devicons = true, -- highlight the icons of `nvim-web-devicons`
                 styles = {
@@ -196,15 +196,15 @@ return {
                 },
                 inc_search = "background", -- underline | background
                 background_clear = {
-                    -- "float_win",
+                    "float_win",
                     "toggleterm",
                     "telescope",
-                    -- "which-key",
+                    "which-key",
                     "renamer",
                     "notify",
-                    -- "nvim-tree",
-                    -- "neo-tree",
-                    -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
+                    "nvim-tree",
+                    "neo-tree",
+                    "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
                 }, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
                 plugins = {
                     bufferline = {
