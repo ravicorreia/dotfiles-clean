@@ -1,6 +1,6 @@
 export DIRENV_LOG_FORMAT=""
 
-$HOME/.nix-profile/bin/fastfetch
+# $HOME/.nix-profile/bin/fastfetch
 
 # fzf defaut configs
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --style full"
