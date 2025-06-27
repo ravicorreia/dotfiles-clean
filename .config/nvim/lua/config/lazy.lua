@@ -21,7 +21,10 @@ require("lazy").setup({
             "LazyVim/LazyVim",
             import = "lazyvim.plugins",
             opts = {
-                colorscheme = "monokai-pro",
+                colorscheme = "solarized-osaka",
+                -- colorscheme = "gruvbox-material",
+                -- colorscheme = "rose-pine",
+                -- colorscheme = "monokai-pro",
             },
         },
         -- import/override with your plugins

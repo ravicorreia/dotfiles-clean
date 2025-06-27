@@ -1,5 +1,8 @@
 export DIRENV_LOG_FORMAT=""
 
+# Add ~/.local/bin to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 # $HOME/.nix-profile/bin/fastfetch
 
 # fzf defaut configs
