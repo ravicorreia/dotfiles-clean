@@ -1,7 +1,13 @@
 export DIRENV_LOG_FORMAT=""
 
+# Editor
+EDITOR='nvim'
+
 # Add ~/.local/bin to PATH
 export PATH="$HOME/.local/bin:$PATH"
+
+# Add ~/.cargo/bin to PATH added that due to eza's cargo build installation.
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # $HOME/.nix-profile/bin/fastfetch
 
@@ -9,19 +15,19 @@ export PATH="$HOME/.local/bin:$PATH"
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --style full"
 export FZF_CTRL_T_OPTS="--style full --walker-skip .git,node_modules,target --preview 'bat --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
-if [ -e /home/$USER/.nix-profile/etc/profile.d/nix.sh ]; then
-  . /home/$USER/.nix-profile/etc/profile.d/nix.sh;
-fi # added by Nix installer
+# No longer using nix...
+# if [ -e /home/$USER/.nix-profile/etc/profile.d/nix.sh ]; then
+#   . /home/$USER/.nix-profile/etc/profile.d/nix.sh;
+# fi # added by Nix installer
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
   && ~/.tmux/plugins/tpm/bin/install_plugins
 fi
+
+# TODO need to find out what are those to lines for..
 setopt PROMPT_SUBST
 precmd() { print -n "\033]0;${PWD}\007" }
-
-# Editor
-EDITOR='nvim'
 
 # Zinit
 # Set the directory we want to store zinit and plugins
@@ -92,6 +98,7 @@ alias lg='lazygit'
 alias q='exit'
 alias minikctl="minikube kubectl"
 
+# nvm requires
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
