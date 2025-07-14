@@ -15,7 +15,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --style full"
 export FZF_CTRL_T_OPTS="--style full --walker-skip .git,node_modules,target --preview 'bat --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
-# No longer using nix...
+# Nix no longer required with Fedora
 # if [ -e /home/$USER/.nix-profile/etc/profile.d/nix.sh ]; then
 #   . /home/$USER/.nix-profile/etc/profile.d/nix.sh;
 # fi # added by Nix installer
