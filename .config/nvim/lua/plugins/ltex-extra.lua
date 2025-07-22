@@ -1,0 +1,72 @@
+return {
+    --     "barreiroleo/ltex_extra.nvim",
+    --     ft = { "markdown", "tex", "text" },
+    --     dependencies = { "neovim/nvim-lspconfig" },
+    --     config = function()
+    --         require("ltex_extra").setup({
+    --             -- Load both English and Portuguese dictionaries
+    --             load_langs = { "en-GB", "pt-BR" },
+    --             init_check = true,
+    --             path = "",
+    --             -- log_level = "debug", -- Enable debug logging to help identify the rule
+    --             -- log_file = "/tmp/ltex-log/ltex.log", -- Log to a file we can examine
+    --             server_opts = {
+    --                 on_attach = function(client, bufnr)
+    --                     -- your on_attach process
+    --                 end,
+    --                 settings = {
+    --                     ltex = {
+    --                         -- Supported file types
+    --                         filetypes = {
+    --                             "bib",
+    --                             "gitcommit",
+    --                             "latex",
+    --                             "mail",
+    --                             "markdown",
+    --                             "norg",
+    --                             "org",
+    --                             "pandoc",
+    --                             "rst",
+    --                             "text",
+    --                         },
+    --                         -- Main LTeX settings
+    --                         -- language = "en-GB", -- Set English to be the default language
+    --                         language = "pt-BR", -- Set Portuguese to be the default language
+    --                         -- language = "auto", -- Auto-detect language in document
+    --                         additionalRules = {
+    --                             enablePickyRules = true,
+    --                             motherTongue = "pt-BR", -- Your native language
+    --                         },
+    --                         -- Simplified language-specific rule configurations
+    --                         -- disabledRules = {
+    --                         --     ["en-GB"] = {
+    --                         --         "TOO_LONG_SENTENCE",
+    --                         --         "OXFORD_SPELLING_Z_NOT_S",
+    --                         --         "DASH_RULE"
+    --                         --     },
+    --                         --     ["pt-BR"] = {
+    --                         --         "TOO_LONG_PARAGRAPH",
+    --                         --         "REDUNDANT_COMMA",
+    --                         --         "PT_REDUNDANT_COMMA",
+    --                         --         "PT_WORDINESS_REPLACE",
+    --                         --         "AGREEMENT_POSTPONED_ADJECTIVE",
+    --                         --         "PLURAL_VERB_AFTER_SUBJECT",
+    --                         --         "PT_SIMPLE_REPLACE",
+    --                         --         "PT_AGREEMENT_REPLACE"
+    --                         --     }
+    --                         -- },
+    --                         -- Dictionary settings for both languages
+    --                         dictionary = {
+    --                             ["en-GB"] = {}, -- Add any English custom words here
+    --                             ["pt-BR"] = {}, -- Add any Portuguese custom words here
+    --                         },
+    --                         -- Enable both languages for checking
+    --                         -- languageToolHttpServerUri = nil,
+    --                         -- Set how LTeX behaves with multilingual documents
+    --                         checkFrequency = "edit", -- Check on document edits
+    --                     },
+    --                 },
+    --             },
+    --         })
+    --     end,
+}
