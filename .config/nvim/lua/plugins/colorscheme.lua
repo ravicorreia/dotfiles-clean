@@ -162,6 +162,7 @@ return {
         config = function()
             vim.g.gruvbox_material_enable_italic = true
             vim.g.gruvbox_material_transparent_background = 2
+            vim.g.gruvbox_material_float_style = "dim"
         end,
     },
 
