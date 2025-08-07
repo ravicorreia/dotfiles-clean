@@ -3,3 +3,4 @@ history.txt
 .config/warp-terminal/user_preferences.json
 .config/gh
 .config/github-copilot
+.config/nvim/spell
